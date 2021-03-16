@@ -11,10 +11,10 @@
 
 const char *tree_type = "tree";
 
-static int read_tree_1(struct repository *r,
-		       struct tree *tree, struct strbuf *base,
-		       const struct pathspec *pathspec,
-		       read_tree_fn_t fn, void *context)
+int read_tree_at(struct repository *r,
+		 struct tree *tree, struct strbuf *base,
+		 const struct pathspec *pathspec,
+		 read_tree_fn_t fn, void *context)
 {
 	struct tree_desc desc;
 	struct name_entry entry;
@@ -71,9 +71,9 @@ static int read_tree_1(struct repository *r,
 		len = tree_entry_len(&entry);
 		strbuf_add(base, entry.path, len);
 		strbuf_addch(base, '/');
-		retval = read_tree_1(r, lookup_tree(r, &oid),
-				     base, pathspec,
-				     fn, context);
+		retval = read_tree_at(r, lookup_tree(r, &oid),
+				      base, pathspec,
+				      fn, context);
 		strbuf_setlen(base, oldlen);
 		if (retval)
 			return -1;
@@ -89,7 +89,7 @@ int read_tree(struct repository *r,
 	struct strbuf sb = STRBUF_INIT;
 	int ret;
 
-	ret = read_tree_1(r, tree, &sb, pathspec, fn, context);
+	ret = read_tree_at(r, tree, &sb, pathspec, fn, context);
 	strbuf_release(&sb);
 	return ret;
 }
