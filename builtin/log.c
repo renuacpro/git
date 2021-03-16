@@ -681,9 +681,9 @@ int cmd_show(int argc, const char **argv, const char *prefix)
 					diff_get_color_opt(&rev.diffopt, DIFF_COMMIT),
 					name,
 					diff_get_color_opt(&rev.diffopt, DIFF_RESET));
-			read_tree_recursive(the_repository, (struct tree *)o,
-					    &match_all, show_tree_object,
-					    rev.diffopt.file);
+			read_tree(the_repository, (struct tree *)o,
+				  &match_all, show_tree_object,
+				  rev.diffopt.file);
 			rev.shown_one = 1;
 			break;
 		case OBJ_COMMIT:

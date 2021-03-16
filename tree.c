@@ -81,10 +81,10 @@ static int read_tree_1(struct repository *r,
 	return 0;
 }
 
-int read_tree_recursive(struct repository *r,
-			struct tree *tree,
-			const struct pathspec *pathspec,
-			read_tree_fn_t fn, void *context)
+int read_tree(struct repository *r,
+	      struct tree *tree,
+	      const struct pathspec *pathspec,
+	      read_tree_fn_t fn, void *context)
 {
 	struct strbuf sb = STRBUF_INIT;
 	int ret;
