@@ -43,6 +43,10 @@ test_perf 'rev-list (objects)' '
 	git rev-list --all --use-bitmap-index --objects >/dev/null
 '
 
+test_perf 'rev-list with negation (objects)' '
+	git rev-list --not --all --use-bitmap-index --objects >/dev/null
+'
+
 test_perf 'rev-list count with blob:none' '
 	git rev-list --use-bitmap-index --count --objects --all \
 		--filter=blob:none >/dev/null
